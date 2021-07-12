@@ -8,12 +8,13 @@ const USERNAME_KEY = 'username';
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const username = loginInput.value;
-  localStorage.setItem(USERNAME_KEY, username);
-  showGreeting(username);
+  loginForm.classList.add(HIDDEN_CLASSNAME);
+  localStorage.setItem(USERNAME_KEY, loginInput.value);
+  showGreeting();
 });
 
-function showGreeting(username) {
+function showGreeting() {
+  const username = localStorage.getItem(USERNAME_KEY);
   greeting.innerText = `hello, ${username}!`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
@@ -24,5 +25,5 @@ if (savedUserName === null) {
   loginForm.classList.remove(HIDDEN_CLASSNAME);
 } else {
   greeting.classList.remove(HIDDEN_CLASSNAME);
-  showGreeting(savedUserName);
+  showGreeting();
 }
